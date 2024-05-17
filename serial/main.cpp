@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <chrono>
 
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
@@ -48,8 +49,6 @@ void grayToBW(Mat image)
             bw_img.at<uchar>(row, col) = (image.at<uchar>(row, col) > 127) ? 255 : 0;
         }
     }
-    // imwrite("Second_Serial.bmp", bw_img);
-    // bw_img.release();
     LaplacianEdgeDetection(bw_img);
 }
 
@@ -71,8 +70,6 @@ void boxFilter(Mat image)
             box_img.at<uchar>(row, col) = sum / 9;
         }
     }
-    // imwrite("Second_Serial.bmp", box_img);
-    // box_img.release();
     grayToBW(box_img);
 }
 
@@ -113,8 +110,6 @@ void verticalMirror(Mat image)
             vertical_img.at<Vec3b>(row, col) = image.at<Vec3b>(-row + image.rows - 1, col);
         }
     }
-    // imwrite("First_Serial.bmp", vertical_img);
-    // vertical_img.release();
     sepiaFilter(vertical_img);
 }
 
@@ -128,8 +123,6 @@ void horizontalMirror(Mat image)
             horizontal_img.at<Vec3b>(row, col) = image.at<Vec3b>(row, -col + image.cols - 1);
         }
     }
-    // imwrite("outcolorcpy.bmp", horizontal_img);
-    // horizontal_img.release();
     verticalMirror(horizontal_img);
 }
 
@@ -140,6 +133,9 @@ int main(int argc, char* argv[])
         cout << "Bad arguments!" << endl;
         exit(EXIT_FAILURE);
     }
+
+    auto start = std::chrono::high_resolution_clock::now();
+
     const string FILE_PATH(argv[1]);
     Mat img_color, img_gray;
     img_color = imread(FILE_PATH, ImreadModes::IMREAD_ANYCOLOR);
@@ -155,4 +151,9 @@ int main(int argc, char* argv[])
 
     horizontalMirror(imgcpy);
     boxFilter(img_gray);
+
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    cout << "Execution Time: " << duration.count() / 1000.0 << endl;
 }
