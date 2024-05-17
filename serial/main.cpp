@@ -76,29 +76,6 @@ void boxFilter(Mat image)
     grayToBW(box_img);
 }
 
-// void sepiaFilter(Mat image)
-// {
-//     Mat sepia_img = image.clone();
-//      for(int row = 0; row < image.rows; ++row)
-//     {
-//         for(int col = 0; col < image.cols; ++col)
-//         {
-//             Vec3b pixel = sepia_img.at<Vec3b>(row, col);
-
-//             uchar originalBlue = pixel[0];
-//             uchar originalGreen = pixel[1];
-//             uchar originalRed = pixel[2];
-
-//             image.at<Vec3b>(row, col)[2] = 0.393 * originalRed + 0.769 * originalGreen + 0.189 * originalBlue;
-//             image.at<Vec3b>(row, col)[1] = 0.349 * originalRed + 0.686 * originalGreen + 0.168 * originalBlue;
-//             image.at<Vec3b>(row, col)[0] = 0.272 * originalRed + 0.534 * originalGreen + 0.131 * originalBlue;
-//         }
-//     }
-//     imwrite("First_Serial.bmp", image);
-//     image.release();
-// }
-
-
 void sepiaFilter(Mat image)
 {
     Mat sepia_img = image.clone();
