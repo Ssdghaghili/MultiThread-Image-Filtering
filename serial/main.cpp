@@ -128,13 +128,13 @@ void horizontalMirror(Mat image)
 
 int main(int argc, char* argv[])
 {
+    auto start = std::chrono::high_resolution_clock::now();
+    
     if(argc != 2)
     {
         cout << "Bad arguments!" << endl;
         exit(EXIT_FAILURE);
     }
-
-    auto start = std::chrono::high_resolution_clock::now();
 
     const string FILE_PATH(argv[1]);
     Mat img_color, img_gray;
