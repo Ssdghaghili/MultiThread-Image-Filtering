@@ -199,19 +199,19 @@ pair<Mat, Mat> passToThread(Mat& img_color, Mat& img_gray)
     Mat img_vertical_mirror = img_horizontal_mirror.clone();
     parallelProcess(img_horizontal_mirror, img_vertical_mirror, verticalMirror, MAX_NUM_THREADS);
 
-    // Sepia Filter
+    // Sepia 
     Mat img_sepia = img_vertical_mirror.clone();
     parallelProcess(img_vertical_mirror, img_sepia, sepiaFilter, MAX_NUM_THREADS);
 
-    // Box Filter
+    // Box
     Mat img_box = img_gray.clone();
     parallelProcess(img_gray, img_box, boxFilter, MAX_NUM_THREADS);
 
-    // Convert to Black and White
+    // Gray to BW
     Mat img_bw = img_box.clone();
     parallelProcess(img_box, img_bw, grayToBW, MAX_NUM_THREADS);
 
-    // Laplacian Edge Detection
+    // Edge Detection
     Mat img_edge = img_bw.clone();
     parallelProcess(img_bw, img_edge, LaplacianEdgeDetection, MAX_NUM_THREADS);
 
