@@ -1,4 +1,4 @@
-Operating System project 3 - serial and parallel image processing using thread
+Operating System project 3 - serial and parallel image Filtering using thread
 
 - first open new terminal tab at this folder
 - navigate to ./serial or ./parallel folder. (cd serial or cd parallel)
